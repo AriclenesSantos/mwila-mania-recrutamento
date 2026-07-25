@@ -16,6 +16,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminCandidatosIndexRouteImport } from './routes/_authenticated/admin.candidatos.index'
+import { Route as AuthenticatedAdminCandidatosIdRouteImport } from './routes/_authenticated/admin.candidatos.$id'
 
 const CandidatarRoute = CandidatarRouteImport.update({
   id: '/candidatar',
@@ -52,6 +53,12 @@ const AuthenticatedAdminCandidatosIndexRoute =
     path: '/candidatos/',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminCandidatosIdRoute =
+  AuthenticatedAdminCandidatosIdRouteImport.update({
+    id: '/candidatos/$id',
+    path: '/candidatos/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/candidatar': typeof CandidatarRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
   '/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
   '/admin/candidatos': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRoutesById {
@@ -76,6 +85,7 @@ export interface FileRoutesById {
   '/candidatar': typeof CandidatarRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
   '/_authenticated/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRouteTypes {
@@ -86,9 +96,16 @@ export interface FileRouteTypes {
     | '/candidatar'
     | '/admin'
     | '/admin/'
+    | '/admin/candidatos/$id'
     | '/admin/candidatos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/candidatar' | '/admin' | '/admin/candidatos'
+  to:
+    | '/'
+    | '/auth'
+    | '/candidatar'
+    | '/admin'
+    | '/admin/candidatos/$id'
+    | '/admin/candidatos'
   id:
     | '__root__'
     | '/'
@@ -97,6 +114,7 @@ export interface FileRouteTypes {
     | '/candidatar'
     | '/_authenticated/admin'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/candidatos/$id'
     | '/_authenticated/admin/candidatos/'
   fileRoutesById: FileRoutesById
 }
@@ -158,16 +176,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminCandidatosIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/candidatos/$id': {
+      id: '/_authenticated/admin/candidatos/$id'
+      path: '/candidatos/$id'
+      fullPath: '/admin/candidatos/$id'
+      preLoaderRoute: typeof AuthenticatedAdminCandidatosIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminCandidatosIdRoute: typeof AuthenticatedAdminCandidatosIdRoute
   AuthenticatedAdminCandidatosIndexRoute: typeof AuthenticatedAdminCandidatosIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminCandidatosIdRoute: AuthenticatedAdminCandidatosIdRoute,
   AuthenticatedAdminCandidatosIndexRoute:
     AuthenticatedAdminCandidatosIndexRoute,
 }
