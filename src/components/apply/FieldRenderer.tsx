@@ -17,10 +17,12 @@ export function FieldRenderer({ field, values, error, onChange }: Props) {
 
   return (
     <div className="space-y-3">
-      <Label className="block text-sm leading-relaxed font-medium text-foreground/90">
-        {field.label}
-        {field.optional && <span className="ml-2 text-xs text-muted-foreground">(opcional)</span>}
-      </Label>
+      {field.type !== "consent" && (
+        <Label className="block text-sm leading-relaxed font-medium text-foreground/90">
+          {field.label}
+          {field.optional && <span className="ml-2 text-xs text-muted-foreground">(opcional)</span>}
+        </Label>
+      )}
       {field.hint && <p className="text-xs text-muted-foreground">{field.hint}</p>}
 
       {(field.type === "text" ||
