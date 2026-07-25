@@ -39,21 +39,24 @@ export const Route = createFileRoute("/")({
 const VAGAS = [
   {
     icon: PenTool,
-    image: "/vaga-copywriter.svg",
+    image:
+      "https://images.pexels.com/photos/4126712/pexels-photo-4126712.jpeg?auto=compress&cs=tinysrgb&w=1200",
     title: "Copywriter",
     count: "2 vagas",
     text: "Escreve publicações que fazem a comunidade comentar, partilhar e voltar.",
   },
   {
     icon: Film,
-    image: "/vaga-editor-video.svg",
+    image:
+      "https://images.pexels.com/photos/32479534/pexels-photo-32479534.jpeg?auto=compress&cs=tinysrgb&w=1200",
     title: "Editor de Vídeo",
     count: "1 vaga",
     text: "Transforma cenas de animes e cultura pop em vídeos curtos e viciantes.",
   },
   {
     icon: Palette,
-    image: "/vaga-designer.svg",
+    image:
+      "https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=1200",
     title: "Designer Gráfico",
     count: "2 vagas",
     text: "Cria cartazes e artes que se destacam no feed e definem a nossa identidade.",
@@ -117,13 +120,15 @@ function Landing() {
               transition={{ duration: 0.5, delay: 0.1 * i }}
               className="surface-card group overflow-hidden rounded-3xl transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="aspect-[16/10] w-full overflow-hidden bg-background/40">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-background/40">
                 <img
                   src={vaga.image}
                   alt={`Ilustração da vaga de ${vaga.title}`}
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="size-full object-cover grayscale contrast-125 transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
+                <div className="absolute inset-0 bg-primary/55 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
               </div>
               <div className="p-6">
                 <vaga.icon className="size-8 text-primary" />
