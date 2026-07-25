@@ -9,38 +9,178 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as CandidatarRouteImport } from './routes/candidatar'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminRankingRouteImport } from './routes/_authenticated/admin.ranking'
+import { Route as AuthenticatedAdminCandidatosIndexRouteImport } from './routes/_authenticated/admin.candidatos.index'
+import { Route as AuthenticatedAdminCandidatosIdRouteImport } from './routes/_authenticated/admin.candidatos.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CandidatarRoute = CandidatarRouteImport.update({
+  id: '/candidatar',
+  path: '/candidatar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminRankingRoute =
+  AuthenticatedAdminRankingRouteImport.update({
+    id: '/ranking',
+    path: '/ranking',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminCandidatosIndexRoute =
+  AuthenticatedAdminCandidatosIndexRouteImport.update({
+    id: '/candidatos/',
+    path: '/candidatos/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminCandidatosIdRoute =
+  AuthenticatedAdminCandidatosIdRouteImport.update({
+    id: '/candidatos/$id',
+    path: '/candidatos/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/candidatar': typeof CandidatarRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/ranking': typeof AuthenticatedAdminRankingRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
+  '/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/candidatar': typeof CandidatarRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/ranking': typeof AuthenticatedAdminRankingRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
+  '/admin/candidatos': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/candidatar': typeof CandidatarRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin/ranking': typeof AuthenticatedAdminRankingRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
+  '/_authenticated/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/candidatar'
+    | '/sitemap.xml'
+    | '/admin'
+    | '/admin/ranking'
+    | '/admin/'
+    | '/admin/candidatos/$id'
+    | '/admin/candidatos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/candidatar'
+    | '/sitemap.xml'
+    | '/admin/ranking'
+    | '/admin'
+    | '/admin/candidatos/$id'
+    | '/admin/candidatos'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/candidatar'
+    | '/sitemap.xml'
+    | '/_authenticated/admin'
+    | '/_authenticated/admin/ranking'
+    | '/_authenticated/admin/'
+    | '/_authenticated/admin/candidatos/$id'
+    | '/_authenticated/admin/candidatos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  CandidatarRoute: typeof CandidatarRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/candidatar': {
+      id: '/candidatar'
+      path: '/candidatar'
+      fullPath: '/candidatar'
+      preLoaderRoute: typeof CandidatarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +188,80 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/ranking': {
+      id: '/_authenticated/admin/ranking'
+      path: '/ranking'
+      fullPath: '/admin/ranking'
+      preLoaderRoute: typeof AuthenticatedAdminRankingRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/candidatos/': {
+      id: '/_authenticated/admin/candidatos/'
+      path: '/candidatos'
+      fullPath: '/admin/candidatos/'
+      preLoaderRoute: typeof AuthenticatedAdminCandidatosIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/candidatos/$id': {
+      id: '/_authenticated/admin/candidatos/$id'
+      path: '/candidatos/$id'
+      fullPath: '/admin/candidatos/$id'
+      preLoaderRoute: typeof AuthenticatedAdminCandidatosIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminRankingRoute: typeof AuthenticatedAdminRankingRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminCandidatosIdRoute: typeof AuthenticatedAdminCandidatosIdRoute
+  AuthenticatedAdminCandidatosIndexRoute: typeof AuthenticatedAdminCandidatosIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminRankingRoute: AuthenticatedAdminRankingRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminCandidatosIdRoute: AuthenticatedAdminCandidatosIdRoute,
+  AuthenticatedAdminCandidatosIndexRoute:
+    AuthenticatedAdminCandidatosIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  CandidatarRoute: CandidatarRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
