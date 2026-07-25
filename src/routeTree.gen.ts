@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as CandidatarRouteImport } from './routes/candidatar'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -19,6 +20,11 @@ import { Route as AuthenticatedAdminRankingRouteImport } from './routes/_authent
 import { Route as AuthenticatedAdminCandidatosIndexRouteImport } from './routes/_authenticated/admin.candidatos.index'
 import { Route as AuthenticatedAdminCandidatosIdRouteImport } from './routes/_authenticated/admin.candidatos.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CandidatarRoute = CandidatarRouteImport.update({
   id: '/candidatar',
   path: '/candidatar',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/ranking': typeof AuthenticatedAdminRankingRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/ranking': typeof AuthenticatedAdminRankingRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/ranking': typeof AuthenticatedAdminRankingRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/candidatar'
+    | '/sitemap.xml'
     | '/admin'
     | '/admin/ranking'
     | '/admin/'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/candidatar'
+    | '/sitemap.xml'
     | '/admin/ranking'
     | '/admin'
     | '/admin/candidatos/$id'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/candidatar'
+    | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/_authenticated/admin/ranking'
     | '/_authenticated/admin/'
@@ -136,10 +148,18 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   CandidatarRoute: typeof CandidatarRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/candidatar': {
       id: '/candidatar'
       path: '/candidatar'
@@ -240,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   CandidatarRoute: CandidatarRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
