@@ -39,18 +39,21 @@ export const Route = createFileRoute("/")({
 const VAGAS = [
   {
     icon: PenTool,
+    image: "/vaga-copywriter.svg",
     title: "Copywriter",
     count: "2 vagas",
     text: "Escreve publicações que fazem a comunidade comentar, partilhar e voltar.",
   },
   {
     icon: Film,
+    image: "/vaga-editor-video.svg",
     title: "Editor de Vídeo",
     count: "1 vaga",
     text: "Transforma cenas de animes e cultura pop em vídeos curtos e viciantes.",
   },
   {
     icon: Palette,
+    image: "/vaga-designer.svg",
     title: "Designer Gráfico",
     count: "2 vagas",
     text: "Cria cartazes e artes que se destacam no feed e definem a nossa identidade.",
@@ -85,9 +88,6 @@ function Landing() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-primary">
-            <Sparkles className="size-3.5" /> Recrutamento aberto
-          </span>
           <h1 className="mt-6 text-4xl leading-[1.05] font-bold sm:text-6xl">
             Junta-te à próxima geração da{" "}
             <span className="text-gradient">Mwila Mania</span>
@@ -115,16 +115,26 @@ function Landing() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * i }}
-              className="surface-card group rounded-3xl p-6 transition-transform duration-300 hover:-translate-y-1"
+              className="surface-card group overflow-hidden rounded-3xl transition-transform duration-300 hover:-translate-y-1"
             >
-              <vaga.icon className="size-8 text-primary" />
-              <div className="mt-5 flex items-center justify-between gap-3">
-                <h2 className="text-xl font-semibold">{vaga.title}</h2>
-                <span className="rounded-full bg-accent/15 px-3 py-1 text-xs text-accent">
-                  {vaga.count}
-                </span>
+              <div className="aspect-[16/10] w-full overflow-hidden bg-background/40">
+                <img
+                  src={vaga.image}
+                  alt={`Ilustração da vaga de ${vaga.title}`}
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{vaga.text}</p>
+              <div className="p-6">
+                <vaga.icon className="size-8 text-primary" />
+                <div className="mt-5 flex items-center justify-between gap-3">
+                  <h2 className="text-xl font-semibold">{vaga.title}</h2>
+                  <span className="rounded-full bg-accent/15 px-3 py-1 text-xs text-accent">
+                    {vaga.count}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{vaga.text}</p>
+              </div>
             </motion.article>
           ))}
         </div>

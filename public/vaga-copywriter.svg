@@ -1,0 +1,52 @@
+<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração de um copywriter a escrever">
+  <defs>
+    <radialGradient id="bgGlowCW" cx="50%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#ee333e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ee333e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="deskCW" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c21725"/>
+      <stop offset="100%" stop-color="#8f0f1c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="260" fill="url(#bgGlowCW)"/>
+
+  <!-- floating letters -->
+  <g fill="#f2e0de" opacity="0.55" font-family="Space Grotesk, sans-serif" font-weight="700">
+    <text x="30" y="55" font-size="26">Aa</text>
+    <text x="330" y="45" font-size="20">"</text>
+    <text x="345" y="90" font-size="18">!</text>
+  </g>
+
+  <!-- desk -->
+  <rect x="70" y="190" width="260" height="14" rx="7" fill="url(#deskCW)"/>
+  <rect x="90" y="204" width="14" height="34" fill="#65000b"/>
+  <rect x="296" y="204" width="14" height="34" fill="#65000b"/>
+
+  <!-- laptop -->
+  <g>
+    <rect x="150" y="150" width="100" height="66" rx="8" fill="#1c1413" stroke="#f2e0de" stroke-width="4"/>
+    <rect x="160" y="160" width="80" height="42" rx="4" fill="#c21725"/>
+    <path d="M158 174h64M158 186h48" stroke="#f8f8f8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M144 216 L256 216 L246 190 L154 190 Z" fill="#f2e0de"/>
+  </g>
+
+  <!-- character body -->
+  <g>
+    <ellipse cx="200" cy="150" rx="34" ry="30" fill="#f2e0de"/>
+    <path d="M164 140c0-30 72-30 72 0" fill="#65000b"/>
+    <circle cx="188" cy="150" r="5" fill="#1c1413"/>
+    <circle cx="212" cy="150" r="5" fill="#1c1413"/>
+    <path d="M190 163c6 6 14 6 20 0" stroke="#1c1413" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M155 214c4-34 22-48 45-48s41 14 45 48z" fill="#c21725"/>
+    <rect x="150" y="214" width="20" height="10" rx="4" fill="#f2e0de"/>
+    <rect x="230" y="214" width="20" height="10" rx="4" fill="#f2e0de"/>
+  </g>
+
+  <!-- floating pen -->
+  <g transform="translate(258 118) rotate(24)">
+    <rect x="0" y="0" width="10" height="52" rx="5" fill="#f8f8f8"/>
+    <path d="M0 0h10l-5-14z" fill="#ee333e"/>
+  </g>
+</svg>
