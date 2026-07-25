@@ -11,11 +11,11 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminLayout,
 });
 
-const NAV = [
+const NAV: { to: "/admin" | "/admin/candidatos" | "/admin/ranking"; label: string; icon: typeof Users; exact?: boolean }[] = [
   { to: "/admin", label: "Visão geral", icon: LayoutDashboard, exact: true },
   { to: "/admin/candidatos", label: "Candidatos", icon: Users },
   { to: "/admin/ranking", label: "Ranking", icon: Trophy },
-] as const;
+];
 
 function AdminLayout() {
   const navigate = useNavigate();
