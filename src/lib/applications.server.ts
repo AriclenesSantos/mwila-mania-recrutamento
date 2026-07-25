@@ -63,16 +63,18 @@ export function buildRow(values: FormValues) {
     city: (values.city as string) || null,
     phone: (values.phone as string) || null,
     email: (values.email as string) || null,
-    socials: {
-      facebook: values.facebook ?? "",
-      instagram: values.instagram ?? "",
-      tiktok: values.tiktok ?? "",
-      linkedin: values.linkedin ?? "",
-    },
+    socials: JSON.parse(
+      JSON.stringify({
+        facebook: values.facebook ?? "",
+        instagram: values.instagram ?? "",
+        tiktok: values.tiktok ?? "",
+        linkedin: values.linkedin ?? "",
+      }),
+    ),
     vacancy: String(values.vaga ?? "Aceito qualquer uma"),
-    answers: values as Record<string, unknown>,
+    answers: JSON.parse(JSON.stringify(values)),
     auto_score: score,
-    score_breakdown: breakdown as unknown as Record<string, number>,
-    analysis: analysis as unknown as Record<string, unknown>,
+    score_breakdown: JSON.parse(JSON.stringify(breakdown)),
+    analysis: JSON.parse(JSON.stringify(analysis)),
   };
 }
