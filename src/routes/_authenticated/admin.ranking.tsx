@@ -24,7 +24,7 @@ export const Route = createFileRoute("/_authenticated/admin/ranking")({
   component: RankingPage,
 });
 
-const MEDALS = ["text-[oklch(0.82_0.15_90)]", "text-[oklch(0.8_0.02_260)]", "text-[oklch(0.65_0.12_50)]"];
+const MEDALS = ["text-[oklch(0.62_0.22_24)]", "text-[oklch(0.88_0.01_25)]", "text-[oklch(0.5_0.14_22)]"];
 
 function RankingPage() {
   const { data, isLoading } = useApplications();

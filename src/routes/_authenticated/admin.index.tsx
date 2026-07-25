@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_authenticated/admin/")({
   component: Dashboard,
 });
 
-const COLORS = ["oklch(0.72 0.17 52)", "oklch(0.66 0.15 268)", "oklch(0.7 0.14 165)", "oklch(0.72 0.16 12)", "oklch(0.6 0.02 260)"];
+const COLORS = ["oklch(0.52 0.2 25)", "oklch(0.85 0.01 25)", "oklch(0.62 0.22 24)", "oklch(0.4 0.02 25)", "oklch(0.72 0.1 25)"];
 
 function Dashboard() {
   const { data, isLoading } = useApplications();
@@ -93,7 +93,7 @@ function Dashboard() {
                     color: "var(--foreground)",
                   }}
                 />
-                <Bar dataKey="total" radius={[8, 8, 0, 0]} fill="oklch(0.72 0.17 52)" />
+                <Bar dataKey="total" radius={[8, 8, 0, 0]} fill="oklch(0.52 0.2 25)" />
               </BarChart>
             </ResponsiveContainer>
           </div>
