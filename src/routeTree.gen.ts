@@ -15,6 +15,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminCandidatosIndexRouteImport } from './routes/_authenticated/admin.candidatos.index'
 
 const CandidatarRoute = CandidatarRouteImport.update({
   id: '/candidatar',
@@ -45,6 +46,12 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminCandidatosIndexRoute =
+  AuthenticatedAdminCandidatosIndexRouteImport.update({
+    id: '/candidatos/',
+    path: '/candidatos/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,12 +59,14 @@ export interface FileRoutesByFullPath {
   '/candidatar': typeof CandidatarRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/candidatos': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -67,12 +76,19 @@ export interface FileRoutesById {
   '/candidatar': typeof CandidatarRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/candidatar' | '/admin' | '/admin/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/candidatar'
+    | '/admin'
+    | '/admin/'
+    | '/admin/candidatos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/candidatar' | '/admin'
+  to: '/' | '/auth' | '/candidatar' | '/admin' | '/admin/candidatos'
   id:
     | '__root__'
     | '/'
@@ -81,6 +97,7 @@ export interface FileRouteTypes {
     | '/candidatar'
     | '/_authenticated/admin'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/candidatos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -134,15 +151,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/candidatos/': {
+      id: '/_authenticated/admin/candidatos/'
+      path: '/candidatos'
+      fullPath: '/admin/candidatos/'
+      preLoaderRoute: typeof AuthenticatedAdminCandidatosIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminCandidatosIndexRoute: typeof AuthenticatedAdminCandidatosIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminCandidatosIndexRoute:
+    AuthenticatedAdminCandidatosIndexRoute,
 }
 
 const AuthenticatedAdminRouteWithChildren =

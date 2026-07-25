@@ -35,7 +35,7 @@ import { deleteApplication, updateApplication } from "@/lib/applications.functio
 import { exportExcel, exportListPdf } from "@/lib/export";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_authenticated/admin/candidatos")({
+export const Route = createFileRoute("/_authenticated/admin/candidatos/")({
   head: () => ({
     meta: [
       { title: "Candidatos | Painel Mwila Mania" },
