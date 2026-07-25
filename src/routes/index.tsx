@@ -25,11 +25,11 @@ export const Route = createFileRoute("/")({
         content:
           "Candidata-te à equipa da Mwila Mania: vagas para Copywriter, Editor de Vídeo e Designer Gráfico na maior comunidade geek de Angola.",
       },
-      { property: "og:title", content: "Junta-te à próxima geração da Mwila Mania" },
+      { property: "og:title", content: "Mwila Mania | Recrutamento da equipa geek de Angola" },
       {
         property: "og:description",
         content:
-          "Vagas abertas para Copywriter, Editor de Vídeo e Designer Gráfico na comunidade geek de Angola.",
+          "Candidata-te à equipa da Mwila Mania: vagas para Copywriter, Editor de Vídeo e Designer Gráfico na maior comunidade geek de Angola.",
       },
     ],
   }),
