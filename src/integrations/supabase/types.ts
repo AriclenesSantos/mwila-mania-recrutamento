@@ -14,16 +14,170 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      application_status_history: {
+        Row: {
+          application_id: string
+          changed_by: string | null
+          created_at: string
+          from_status: string | null
+          id: string
+          to_status: string
+        }
+        Insert: {
+          application_id: string
+          changed_by?: string | null
+          created_at?: string
+          from_status?: string | null
+          id?: string
+          to_status: string
+        }
+        Update: {
+          application_id?: string
+          changed_by?: string | null
+          created_at?: string
+          from_status?: string | null
+          id?: string
+          to_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "application_status_history_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      applications: {
+        Row: {
+          admin_notes: string | null
+          age: number | null
+          analysis: Json
+          answers: Json
+          auto_score: number
+          city: string | null
+          created_at: string
+          email: string | null
+          favorite: boolean
+          full_name: string
+          gender: string | null
+          id: string
+          manual_score: number | null
+          phone: string | null
+          score_breakdown: Json
+          socials: Json
+          status: Database["public"]["Enums"]["application_status"]
+          tags: string[]
+          updated_at: string
+          vacancy: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          age?: number | null
+          analysis?: Json
+          answers?: Json
+          auto_score?: number
+          city?: string | null
+          created_at?: string
+          email?: string | null
+          favorite?: boolean
+          full_name: string
+          gender?: string | null
+          id?: string
+          manual_score?: number | null
+          phone?: string | null
+          score_breakdown?: Json
+          socials?: Json
+          status?: Database["public"]["Enums"]["application_status"]
+          tags?: string[]
+          updated_at?: string
+          vacancy?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          age?: number | null
+          analysis?: Json
+          answers?: Json
+          auto_score?: number
+          city?: string | null
+          created_at?: string
+          email?: string | null
+          favorite?: boolean
+          full_name?: string
+          gender?: string | null
+          id?: string
+          manual_score?: number | null
+          phone?: string | null
+          score_breakdown?: Json
+          socials?: Json
+          status?: Database["public"]["Enums"]["application_status"]
+          tags?: string[]
+          updated_at?: string
+          vacancy?: string
+        }
+        Relationships: []
+      }
+      submission_log: {
+        Row: {
+          created_at: string
+          id: string
+          ip_hash: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_hash: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_hash?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      application_status:
+        | "nova"
+        | "em_analise"
+        | "aprovado"
+        | "rejeitado"
+        | "arquivado"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +304,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      application_status: [
+        "nova",
+        "em_analise",
+        "aprovado",
+        "rejeitado",
+        "arquivado",
+      ],
+    },
   },
 } as const
