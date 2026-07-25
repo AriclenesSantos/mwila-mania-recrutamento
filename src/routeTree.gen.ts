@@ -15,6 +15,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminRankingRouteImport } from './routes/_authenticated/admin.ranking'
 import { Route as AuthenticatedAdminCandidatosIndexRouteImport } from './routes/_authenticated/admin.candidatos.index'
 import { Route as AuthenticatedAdminCandidatosIdRouteImport } from './routes/_authenticated/admin.candidatos.$id'
 
@@ -47,6 +48,12 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminRankingRoute =
+  AuthenticatedAdminRankingRouteImport.update({
+    id: '/ranking',
+    path: '/ranking',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminCandidatosIndexRoute =
   AuthenticatedAdminCandidatosIndexRouteImport.update({
     id: '/candidatos/',
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/ranking': typeof AuthenticatedAdminRankingRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
   '/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
@@ -73,6 +81,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
+  '/admin/ranking': typeof AuthenticatedAdminRankingRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
   '/admin/candidatos': typeof AuthenticatedAdminCandidatosIndexRoute
@@ -84,6 +93,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/candidatar': typeof CandidatarRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin/ranking': typeof AuthenticatedAdminRankingRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/admin/candidatos/$id': typeof AuthenticatedAdminCandidatosIdRoute
   '/_authenticated/admin/candidatos/': typeof AuthenticatedAdminCandidatosIndexRoute
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/candidatar'
     | '/admin'
+    | '/admin/ranking'
     | '/admin/'
     | '/admin/candidatos/$id'
     | '/admin/candidatos/'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/candidatar'
+    | '/admin/ranking'
     | '/admin'
     | '/admin/candidatos/$id'
     | '/admin/candidatos'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/candidatar'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/ranking'
     | '/_authenticated/admin/'
     | '/_authenticated/admin/candidatos/$id'
     | '/_authenticated/admin/candidatos/'
@@ -169,6 +182,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/ranking': {
+      id: '/_authenticated/admin/ranking'
+      path: '/ranking'
+      fullPath: '/admin/ranking'
+      preLoaderRoute: typeof AuthenticatedAdminRankingRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/candidatos/': {
       id: '/_authenticated/admin/candidatos/'
       path: '/candidatos'
@@ -187,12 +207,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminRankingRoute: typeof AuthenticatedAdminRankingRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminCandidatosIdRoute: typeof AuthenticatedAdminCandidatosIdRoute
   AuthenticatedAdminCandidatosIndexRoute: typeof AuthenticatedAdminCandidatosIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminRankingRoute: AuthenticatedAdminRankingRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   AuthenticatedAdminCandidatosIdRoute: AuthenticatedAdminCandidatosIdRoute,
   AuthenticatedAdminCandidatosIndexRoute:
