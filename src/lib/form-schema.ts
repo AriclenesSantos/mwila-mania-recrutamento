@@ -6,7 +6,9 @@ export type FieldType =
   | "tel"
   | "radio"
   | "checkboxes"
-  | "consent";
+  | "consent"
+  | "photo"
+  | "info";
 
 export type FormValues = Record<string, string | string[] | boolean | undefined>;
 
@@ -19,6 +21,7 @@ export interface FieldDef {
   placeholder?: string;
   hint?: string;
   group?: string;
+  content?: string[];
   showIf?: (values: FormValues) => boolean;
 }
 
@@ -28,6 +31,7 @@ export interface StepDef {
   description?: string;
   fields: FieldDef[];
 }
+
 
 export const VACANCIES = [
   "Copywriter",
