@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Loader2, Upload } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -110,7 +113,24 @@ export function FieldRenderer({ field, values, error, onChange }: Props) {
         </div>
       )}
 
+      {field.type === "photo" && (
+        <PhotoField
+          value={typeof value === "string" ? value : ""}
+          error={error}
+          onChange={(v) => onChange(field.id, v)}
+        />
+      )}
+
+      {field.type === "info" && (
+        <div className="rounded-xl border border-border bg-secondary/30 p-4">
+          <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {field.content?.map((line) => <li key={line}>{line}</li>)}
+          </ul>
+        </div>
+      )}
+
       {field.type === "consent" && (
+
         <label
           className={cn(
             "flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors",
@@ -126,6 +146,86 @@ export function FieldRenderer({ field, values, error, onChange }: Props) {
           <span className="text-sm text-muted-foreground">{field.label}</span>
         </label>
       )}
+    </div>
+  );
+}
+
+function PhotoField({
+  value,
+  error,
+  onChange,
+}: {
+  value: string;
+  error?: boolean;
+  onChange: (value: string) => void;
+}) {
+  const [preview, setPreview] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  async function handleFile(file: File | undefined) {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      setMessage("Escolhe um ficheiro de imagem (JPG ou PNG).");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage("A fotografia deve ter no máximo 5 MB.");
+      return;
+    }
+    setUploading(true);
+    setMessage(null);
+    try {
+      const ext = file.name.split(".").pop()?.toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+      const path = `${crypto.randomUUID()}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from("candidate-photos")
+        .upload(path, file, { contentType: file.type, upsert: false });
+      if (uploadError) throw uploadError;
+      onChange(path);
+      setPreview(URL.createObjectURL(file));
+    } catch {
+      setMessage("Não foi possível enviar a fotografia. Tenta novamente.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  return (
+    <div className="space-y-3">
+      <label
+        className={cn(
+          "flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border border-dashed p-6 text-center transition-colors",
+          value ? "border-primary bg-primary/10" : "border-border bg-secondary/30",
+          error && !value && "border-destructive",
+        )}
+      >
+        <input
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => void handleFile(e.target.files?.[0])}
+        />
+        {preview ? (
+          <img
+            src={preview}
+            alt="Pré-visualização da fotografia enviada"
+            className="size-28 rounded-full object-cover"
+          />
+        ) : uploading ? (
+          <Loader2 className="size-7 animate-spin text-primary" />
+        ) : (
+          <Upload className="size-7 text-primary" />
+        )}
+        <span className="text-sm text-muted-foreground">
+          {uploading
+            ? "A enviar fotografia..."
+            : value
+              ? "Fotografia enviada. Toca para substituir."
+              : "Toca para escolher uma fotografia (JPG ou PNG, até 5 MB)."}
+        </span>
+      </label>
+      {message && <p className="text-sm text-destructive">{message}</p>}
     </div>
   );
 }

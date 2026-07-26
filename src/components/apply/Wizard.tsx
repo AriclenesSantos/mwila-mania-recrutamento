@@ -66,8 +66,9 @@ export function ApplicationWizard() {
   function validate() {
     const missing = fields
       .filter((f) => {
-        if (f.optional) return false;
+        if (f.optional || f.type === "info") return false;
         const v = values[f.id];
+
         if (f.type === "consent") return v !== true;
         if (f.type === "checkboxes") return !Array.isArray(v) || v.length === 0;
         return !String(v ?? "").trim();

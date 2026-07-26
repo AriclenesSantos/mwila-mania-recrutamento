@@ -46,6 +46,17 @@ export const submitApplication = createServerFn({ method: "POST" })
     return { ok: true as const, id: inserted.id };
   });
 
+export const getPhotoUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { path: string }) => data)
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed } = await supabaseAdmin.storage
+      .from("candidate-photos")
+      .createSignedUrl(data.path, 60 * 60);
+    return { url: signed?.signedUrl ?? null };
+  });
+
 export const listApplications = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {

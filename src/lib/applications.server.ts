@@ -36,6 +36,9 @@ export function validateSubmission(values: FormValues) {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push("Email inválido");
   const age = Number(values.age);
   if (!Number.isFinite(age) || age < 12 || age > 90) errors.push("Idade inválida");
+  if (!String(values.photo_path ?? "").trim()) errors.push("Fotografia obrigatória");
+  if (values.aceita_termos_foto !== true)
+    errors.push("É necessário aceitar os Termos de utilização da fotografia");
   if (values.declara_verdade !== true) errors.push("Declaração de veracidade obrigatória");
   if (values.declara_contacto !== true) errors.push("Autorização de contacto obrigatória");
   return errors;
