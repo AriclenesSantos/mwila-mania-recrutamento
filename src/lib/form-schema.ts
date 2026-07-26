@@ -68,7 +68,7 @@ export const FORM_STEPS: StepDef[] = [
       },
       { id: "email", label: "Email", type: "email", group: "Dados básicos" },
       { id: "facebook", label: "Facebook", type: "text", group: "Redes sociais" },
-      { id: "instagram", label: "Instagram", type: "text", group: "Redes sociais" },
+      { id: "instagram", label: "Instagram", type: "text", optional: true, group: "Redes sociais" },
       { id: "tiktok", label: "TikTok", type: "text", optional: true, group: "Redes sociais" },
       { id: "linkedin", label: "LinkedIn", type: "text", optional: true, group: "Redes sociais" },
     ],
