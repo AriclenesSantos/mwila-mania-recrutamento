@@ -110,7 +110,24 @@ export function FieldRenderer({ field, values, error, onChange }: Props) {
         </div>
       )}
 
+      {field.type === "photo" && (
+        <PhotoField
+          value={typeof value === "string" ? value : ""}
+          error={error}
+          onChange={(v) => onChange(field.id, v)}
+        />
+      )}
+
+      {field.type === "info" && (
+        <div className="rounded-xl border border-border bg-secondary/30 p-4">
+          <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {field.content?.map((line) => <li key={line}>{line}</li>)}
+          </ul>
+        </div>
+      )}
+
       {field.type === "consent" && (
+
         <label
           className={cn(
             "flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors",
