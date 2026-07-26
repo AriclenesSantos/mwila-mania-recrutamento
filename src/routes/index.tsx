@@ -125,11 +125,14 @@ function Landing() {
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-background/40">
                 <img
                   src={vaga.image}
-                  alt={`Ilustração da vaga de ${vaga.title}`}
-                  className="size-full object-cover grayscale contrast-125 transition-transform duration-500 group-hover:scale-105"
+                  alt={`Membro da equipa Mwila Mania na função de ${vaga.title}`}
+                  width={1200}
+                  height={750}
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-primary/55 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-primary/25 mix-blend-multiply" />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
               </div>
               <div className="p-6">
