@@ -149,7 +149,7 @@ export const FORM_STEPS: StepDef[] = [
       { id: "jogo_favorito", label: "Qual é o teu jogo favorito?", type: "text" },
       {
         id: "universo_dominado",
-        label: "Existe algum universo geek em que tenhas bastante conhecimento?",
+        label: "Qual parte ou área do universo geek preferes?",
         type: "textarea",
       },
       {
