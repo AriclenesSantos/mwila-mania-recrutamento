@@ -353,6 +353,39 @@ export const FORM_STEPS: StepDef[] = [
     ],
   },
   {
+    id: "fotografia",
+    title: "Fotografia",
+    description: "Faz o upload de uma fotografia recente.",
+    fields: [
+      {
+        id: "photo_path",
+        label: "Fotografia recente",
+        type: "photo",
+        hint: "A fotografia deve mostrar claramente o teu rosto, com boa iluminação e sem filtros que dificultem a identificação. Evita fotografias desfocadas, de grupo ou com objetos a cobrir o rosto.",
+      },
+      {
+        id: "termos_foto_info",
+        label: "Termos de Utilização da Fotografia",
+        type: "info",
+        content: [
+          "Ao enviar a tua fotografia, declaras que:",
+          "A fotografia enviada é da tua autoria ou possuis autorização para a sua utilização.",
+          "A imagem representa o próprio candidato.",
+          "A fotografia poderá ser utilizada pela Mwila Mania exclusivamente para fins relacionados com o processo de candidatura, seleção e identificação do candidato.",
+          "Caso sejas selecionado(a), a fotografia poderá ser utilizada em materiais internos, perfil da equipa e conteúdos institucionais da Mwila Mania, sempre de forma respeitosa e profissional.",
+          "A Mwila Mania compromete-se a não vender, ceder ou utilizar a fotografia para fins comerciais alheios ao processo de recrutamento sem autorização prévia do candidato.",
+          "O candidato pode solicitar a remoção da fotografia dos registos da empresa caso desista do processo ou quando permitido pela política interna de retenção de dados.",
+        ],
+      },
+      {
+        id: "aceita_termos_foto",
+        label: "Declaro que li e aceito os Termos e Condições de utilização da fotografia.",
+        type: "consent",
+      },
+    ],
+  },
+  {
+
     id: "desafio",
     title: "Desafio Final",
     description: "Última etapa. Mostra-nos como pensas.",
