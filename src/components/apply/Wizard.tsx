@@ -43,6 +43,17 @@ export function ApplicationWizard() {
     }
   }, [values, step, done]);
 
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const target = document.getElementById("wizard-top");
+      const top = target ? target.getBoundingClientRect().top + window.scrollY - 96 : 0;
+      window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+      document.documentElement.scrollTop = Math.max(top, 0);
+      document.body.scrollTop = Math.max(top, 0);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [step, done]);
+
   const current = FORM_STEPS[step];
   const fields = useMemo(() => visibleFields(current, values), [current, values]);
   const progress = Math.round(((step + (done ? 1 : 0)) / FORM_STEPS.length) * 100);
@@ -70,7 +81,6 @@ export function ApplicationWizard() {
     if (!validate()) return;
     if (step < FORM_STEPS.length - 1) {
       setStep(step + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       void send();
     }
@@ -84,7 +94,6 @@ export function ApplicationWizard() {
       if (result.ok) {
         setDone(true);
         localStorage.removeItem(STORAGE_KEY);
-        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         setServerErrors(result.errors);
       }
@@ -120,7 +129,7 @@ export function ApplicationWizard() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div id="wizard-top" className="mx-auto max-w-3xl scroll-mt-24">
       <div className="mb-8">
         <div className="mb-3 flex items-end justify-between gap-4">
           <div>
@@ -207,7 +216,6 @@ export function ApplicationWizard() {
           disabled={step === 0 || submitting}
           onClick={() => {
             setStep(Math.max(0, step - 1));
-            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           <ArrowLeft className="mr-2 size-4" /> Anterior
