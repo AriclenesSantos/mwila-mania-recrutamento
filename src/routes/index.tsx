@@ -15,6 +15,10 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/Logo";
+import imgCopywriter from "@/assets/vaga-copywriter.jpg";
+import imgEditor from "@/assets/vaga-editor.jpg";
+import imgDesigner from "@/assets/vaga-designer.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
