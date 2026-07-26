@@ -39,29 +39,27 @@ export const Route = createFileRoute("/")({
 const VAGAS = [
   {
     icon: PenTool,
-    image:
-      "https://images.pexels.com/photos/4126712/pexels-photo-4126712.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: imgCopywriter,
     title: "Copywriter",
     count: "2 vagas",
     text: "Escreve publicações que fazem a comunidade comentar, partilhar e voltar.",
   },
   {
     icon: Film,
-    image:
-      "https://images.pexels.com/photos/32479534/pexels-photo-32479534.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: imgEditor,
     title: "Editor de Vídeo",
     count: "1 vaga",
     text: "Transforma cenas de animes e cultura pop em vídeos curtos e viciantes.",
   },
   {
     icon: Palette,
-    image:
-      "https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: imgDesigner,
     title: "Designer Gráfico",
     count: "2 vagas",
     text: "Cria cartazes e artes que se destacam no feed e definem a nossa identidade.",
   },
 ];
+
 
 const REQUISITOS = [
   { icon: Lightbulb, label: "Vontade de aprender" },
