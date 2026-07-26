@@ -15,6 +15,10 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/Logo";
+import imgCopywriter from "@/assets/vaga-copywriter.jpg";
+import imgEditor from "@/assets/vaga-editor.jpg";
+import imgDesigner from "@/assets/vaga-designer.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,29 +43,27 @@ export const Route = createFileRoute("/")({
 const VAGAS = [
   {
     icon: PenTool,
-    image:
-      "https://images.pexels.com/photos/4126712/pexels-photo-4126712.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: imgCopywriter,
     title: "Copywriter",
     count: "2 vagas",
     text: "Escreve publicações que fazem a comunidade comentar, partilhar e voltar.",
   },
   {
     icon: Film,
-    image:
-      "https://images.pexels.com/photos/32479534/pexels-photo-32479534.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: imgEditor,
     title: "Editor de Vídeo",
     count: "1 vaga",
     text: "Transforma cenas de animes e cultura pop em vídeos curtos e viciantes.",
   },
   {
     icon: Palette,
-    image:
-      "https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: imgDesigner,
     title: "Designer Gráfico",
     count: "2 vagas",
     text: "Cria cartazes e artes que se destacam no feed e definem a nossa identidade.",
   },
 ];
+
 
 const REQUISITOS = [
   { icon: Lightbulb, label: "Vontade de aprender" },
@@ -123,11 +125,14 @@ function Landing() {
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-background/40">
                 <img
                   src={vaga.image}
-                  alt={`Ilustração da vaga de ${vaga.title}`}
-                  className="size-full object-cover grayscale contrast-125 transition-transform duration-500 group-hover:scale-105"
+                  alt={`Membro da equipa Mwila Mania na função de ${vaga.title}`}
+                  width={1200}
+                  height={750}
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-primary/55 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-primary/25 mix-blend-multiply" />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
               </div>
               <div className="p-6">
