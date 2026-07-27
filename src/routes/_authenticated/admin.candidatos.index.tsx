@@ -25,10 +25,10 @@ import { useApplications } from "@/lib/use-applications";
 import {
   effectiveScore,
   formatDate,
-  initials,
   whatsappLink,
   type AppRow,
 } from "@/lib/applications";
+import { CandidateAvatar } from "@/components/admin/CandidateAvatar";
 import { STATUS_LABEL } from "@/lib/scoring";
 import { VACANCIES } from "@/lib/form-schema";
 import { deleteApplication, updateApplication } from "@/lib/applications.functions";
@@ -198,9 +198,7 @@ function CandidatesPage() {
               key={a.id}
               className="surface-card flex flex-wrap items-center gap-4 rounded-2xl p-4"
             >
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
-                {initials(a.full_name)}
-              </span>
+              <CandidateAvatar app={a} textClassName="text-sm" />
               <Link
                 to="/admin/candidatos/$id"
                 params={{ id: a.id }}
