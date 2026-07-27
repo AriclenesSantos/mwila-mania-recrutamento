@@ -3,7 +3,8 @@ import { useMemo, useState } from "react";
 import { Loader2, Medal, Trophy } from "lucide-react";
 
 import { useApplications } from "@/lib/use-applications";
-import { analysisOf, effectiveScore, initials, type AppRow } from "@/lib/applications";
+import { analysisOf, effectiveScore, type AppRow } from "@/lib/applications";
+import { CandidateAvatar } from "@/components/admin/CandidateAvatar";
 import { RECOMMENDATION_LABEL } from "@/lib/scoring";
 import { VACANCIES } from "@/lib/form-schema";
 import { cn } from "@/lib/utils";
@@ -96,9 +97,7 @@ function RankingPage() {
                       <span className="font-display text-lg text-muted-foreground">{i + 1}</span>
                     )}
                   </span>
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
-                    {initials(a.full_name)}
-                  </span>
+                  <CandidateAvatar app={a} textClassName="text-sm" />
                   <span className="min-w-40 flex-1">
                     <span className="block truncate font-semibold">{a.full_name}</span>
                     <span className="block truncate text-xs text-muted-foreground">
