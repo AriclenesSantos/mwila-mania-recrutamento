@@ -3,7 +3,9 @@ import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis
 import { Loader2, Star, TrendingUp, Trophy, Users } from "lucide-react";
 
 import { useApplications } from "@/lib/use-applications";
-import { effectiveScore, formatDate, initials, type AppRow } from "@/lib/applications";
+import { effectiveScore, formatDate, type AppRow } from "@/lib/applications";
+import { CandidateAvatar } from "@/components/admin/CandidateAvatar";
+
 import { STATUS_LABEL } from "@/lib/scoring";
 import { VACANCIES } from "@/lib/form-schema";
 
@@ -147,9 +149,8 @@ function Panel({ title, apps, showScore }: { title: string; apps: AppRow[]; show
               params={{ id: a.id }}
               className="flex items-center gap-3 rounded-xl border border-border bg-secondary/25 px-4 py-3 transition-colors hover:border-primary/50"
             >
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
-                {initials(a.full_name)}
-              </span>
+              <CandidateAvatar app={a} className="size-9" textClassName="size-9 text-xs" />
+
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-medium">{a.full_name}</span>
                 <span className="block truncate text-xs text-muted-foreground">
