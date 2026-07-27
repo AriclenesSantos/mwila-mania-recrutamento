@@ -24,14 +24,26 @@ export function useCandidatePhoto(path: string) {
   });
 }
 
+function fileNameFor(name: string, url: string) {
+  const ext = (url.split("?")[0].match(/\.(jpe?g|png|webp|heic)$/i)?.[1] ?? "jpg").toLowerCase();
+  const safe = name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, " ");
+  return `${safe || "candidato"}.${ext}`;
+}
+
 async function downloadPhoto(url: string, name: string) {
+  const fileName = fileNameFor(name, url);
   try {
     const response = await fetch(url);
     const blob = await response.blob();
     const objectUrl = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = objectUrl;
-    link.download = `${name.replace(/\s+/g, "-").toLowerCase()}.jpg`;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -40,6 +52,7 @@ async function downloadPhoto(url: string, name: string) {
     window.open(url, "_blank", "noreferrer");
   }
 }
+
 
 export function CandidateAvatar({
   app,
