@@ -26,16 +26,15 @@ import {
 import {
   deleteApplication,
   getApplication,
-  getPhotoUrl,
   updateApplication,
 } from "@/lib/applications.functions";
+import { CandidateAvatar } from "@/components/admin/CandidateAvatar";
 import {
   analysisOf,
   answersOf,
   breakdownOf,
   effectiveScore,
   formatDate,
-  initials,
   mailtoLink,
   whatsappLink,
   type AppRow,
@@ -132,7 +131,7 @@ function CandidateDetail() {
       </Link>
 
       <div className="surface-card flex flex-wrap items-center gap-5 rounded-3xl p-6">
-        <CandidatePhoto path={String(answers.photo_path ?? "")} name={app.full_name} />
+        <CandidateAvatar app={app} className="size-16" textClassName="size-16 text-xl font-display" />
         <div className="min-w-48 flex-1">
           <h1 className="text-2xl font-bold">{app.full_name}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -349,32 +348,5 @@ function CandidateDetail() {
         </div>
       )}
     </div>
-  );
-}
-
-
-function CandidatePhoto({ path, name }: { path: string; name: string }) {
-  const fetchUrl = useServerFn(getPhotoUrl);
-  const { data } = useQuery({
-    queryKey: ["candidate-photo", path],
-    queryFn: () => fetchUrl({ data: { path } }),
-    enabled: Boolean(path),
-    staleTime: 30 * 60 * 1000,
-  });
-
-  if (data?.url) {
-    return (
-      <img
-        src={data.url}
-        alt={`Fotografia de ${name}`}
-        className="size-16 rounded-full object-cover"
-      />
-    );
-  }
-
-  return (
-    <span className="flex size-16 items-center justify-center rounded-full bg-primary/15 font-display text-xl font-bold text-primary">
-      {initials(name)}
-    </span>
   );
 }
